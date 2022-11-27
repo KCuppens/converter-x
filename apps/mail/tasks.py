@@ -1,4 +1,4 @@
-from {app_name}.celery import app
+from converterx.celery import app
 
 
 @app.task(

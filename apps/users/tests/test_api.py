@@ -77,8 +77,8 @@ class UserAuthTestCase(CustomGraphQLTestCase):
     @pytest.mark.django_db(transaction=True, reset_sequences=True)
     def create_user(self):
         return get_user_model().objects.create_user(
-            username="test@{app_name}.be",
-            email="test@{app_name}.be",
+            username="test@converterx.be",
+            email="test@converterx.be",
             password="dolphins",
             is_staff=True,
         )
@@ -114,7 +114,7 @@ class UserAuthTestCase(CustomGraphQLTestCase):
             variables={
                 "first_name": "Test",
                 "last_name": "Test",
-                "email": "new@{app_name}.be",
+                "email": "new@converterx.be",
                 "password": "test123",
             },
         )
@@ -154,7 +154,7 @@ class UserAuthTestCase(CustomGraphQLTestCase):
                 }
             }
             """,
-            variables={"email": "test@{app_name}.be", "password": "dolphins"},
+            variables={"email": "test@converterx.be", "password": "dolphins"},
         )
         self.assertEqual(
             response.json()["data"]["loginUser"]["verificationMessage"],
