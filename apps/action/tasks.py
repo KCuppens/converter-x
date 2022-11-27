@@ -35,16 +35,16 @@
 #     return f"Deleted {action_count} actions and {compression_count} compressions"
 
 
-schedule, _ = CrontabSchedule.objects.get_or_create(
-    minute="30",
-    hour="*",
-    day_of_week="*",
-    day_of_month="*",
-    month_of_year="*",
-)
+# schedule, _ = CrontabSchedule.objects.get_or_create(
+#     minute="30",
+#     hour="*",
+#     day_of_week="*",
+#     day_of_month="*",
+#     month_of_year="*",
+# )
 
-PeriodicTask.objects.create(
-    crontab=schedule,
-    name="Delete expired actions",
-    task="apps.action.tasks.delete_expired_actions",
-)
+# PeriodicTask.objects.create(
+#     crontab=schedule,
+#     name="Delete expired actions",
+#     task="apps.action.tasks.delete_expired_actions",
+# )
