@@ -1,16 +1,13 @@
-# from django.db import models
+from django.db import models
 
 from apps.action.managers import ActionManager
 from apps.base.models import BaseModel
-
-
-# from apps.compression.models import Compression
+from apps.conversions.models import Conversion
 
 
 class Action(BaseModel):
-    pass
     # The storage of files in session
-    # conversions = models.ManyToManyField(Conversion, blank=True)
+    conversions = models.ManyToManyField(Conversion, blank=True)
 
     objects = ActionManager()
 

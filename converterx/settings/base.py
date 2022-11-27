@@ -117,6 +117,7 @@ LOCAL_APPS = [
     "apps.blog",
     "apps.config",
     "apps.contact",
+    "apps.conversions",
     "apps.cookies",
     "apps.mail",
     "apps.translations",

@@ -9,13 +9,11 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ("conversions", "0001_initial"),
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name="Action",
+            name="Conversion",
             fields=[
                 (
                     "id",
@@ -38,10 +36,6 @@ class Migration(migrations.Migration):
                 (
                     "date_deleted",
                     models.DateTimeField(blank=True, null=True, verbose_name="Delete date"),
-                ),
-                (
-                    "conversions",
-                    models.ManyToManyField(blank=True, to="conversions.conversion"),
                 ),
             ],
             options={
