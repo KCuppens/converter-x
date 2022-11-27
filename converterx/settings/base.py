@@ -122,6 +122,7 @@ LOCAL_APPS = [
     "apps.cookies",
     "apps.initial_files",
     "apps.mail",
+    "apps.pages",
     "apps.translations",
     "apps.users",
 ]
