@@ -118,6 +118,7 @@ LOCAL_APPS = [
     "apps.config",
     "apps.contact",
     "apps.conversions",
+    "apps.converted_files",
     "apps.cookies",
     "apps.initial_files",
     "apps.mail",
