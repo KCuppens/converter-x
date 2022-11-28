@@ -1,7 +1,6 @@
 import graphene
 from graphene_django import DjangoObjectType
 
-from apps.action.models import Action
 from apps.conversions.models import Conversion
 from apps.convert.services.ConvertEngine import ConvertEngine
 
@@ -25,9 +24,6 @@ class RemoveConversion(graphene.Mutation):
             conversion_obj.initial_file.delete()
         if conversion_obj.converted_file:
             conversion_obj.converted_file.delete()
-        # Delete from action
-        action_obj = Action.objects.get(conversions__id=str(conversion_obj.id))
-        action_obj.conversions.remove(conversion_obj)
         # Delete object
         conversion_obj.delete()
         return RemoveConversion(message="Conversion is removed.")

@@ -16,11 +16,11 @@ class FileConverterTestCase(CustomGraphQLTestCase):
         self.initial_file = InitialFileFactory(file="test_file.png")
         self.conversion = ConversionFactory(initial_file=self.initial_file)
 
-    def test_convert_doc_to_pdf(self):
+    def test_convert_from_doc_to_pdf(self):
         if sys.platform == "win32":
             assert True
         else:
-            path = FileConverter().convert_doc_to_pdf(self.conversion)
+            path = FileConverter().convert_from_doc_to_pdf(self.conversion)
             self.assertTrue(path)
             self.assertTrue(self.media_storage.exists(path))
             self.initial_file.delete()
