@@ -1,6 +1,7 @@
 import graphene
 from graphene_django import DjangoObjectType
 
+from apps.action.models import Action
 from apps.conversions.models import Conversion
 from apps.convert.services.ConvertEngine import ConvertEngine
 
@@ -8,6 +9,28 @@ from apps.convert.services.ConvertEngine import ConvertEngine
 class ConversionType(DjangoObjectType):
     class Meta:
         model = Conversion
+
+
+class RemoveConversion(graphene.Mutation):
+    message = graphene.String()
+
+    class Arguments:
+        conversion_id = graphene.String()
+
+    def mutate(self, info, **kwargs):
+        conversion_id = kwargs.get("conversion_id")
+        conversion_obj = Conversion.objects.get(id=conversion_id)
+        # Remove initial file and conversion file from s3
+        if conversion_obj.initial_file:
+            conversion_obj.initial_file.delete()
+        if conversion_obj.converted_file:
+            conversion_obj.converted_file.delete()
+        # Delete from action
+        action_obj = Action.objects.get(conversions__id=str(conversion_obj.id))
+        action_obj.conversions.remove(conversion_obj)
+        # Delete object
+        conversion_obj.delete()
+        return RemoveConversion(message="Conversion is removed.")
 
 
 class SetConversionToAction(graphene.Mutation):
@@ -39,3 +62,4 @@ class SetConversionToAction(graphene.Mutation):
 
 class Mutation(graphene.ObjectType):
     set_conversion_to_action = SetConversionToAction.Field()
+    remove_conversion = RemoveConversion.Field()
