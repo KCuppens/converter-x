@@ -32,7 +32,7 @@ class InitialFileUtilsTestCase(CustomGraphQLTestCase):
     def test_uploading_initial_file(self):
         test_file = SimpleUploadedFile("assignment.jpg", b"content")
         action_obj = ActionFactory()
-        initial_file = uploading_initial_file(test_file, action_obj)
+        initial_file = uploading_initial_file(test_file, action_obj, "jpg")
         media_storage = MediaStorage()
         initial_file.refresh_from_db()
         path = str(initial_file.file)
