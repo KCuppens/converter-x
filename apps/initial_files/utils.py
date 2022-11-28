@@ -5,13 +5,13 @@ from apps.conversions.models import Conversion
 from apps.initial_files.models import InitialFile
 
 
-def uploading_initial_file(file, action_obj):
+def uploading_initial_file(file, action_obj, from_action):
     """
     Creating the InitialFile
     Assign InitialFile to Action
     """
     # Creating Conversion
-    conversion_obj = Conversion.objects.create()
+    conversion_obj = Conversion.objects.create(from_action=from_action)
     filename = get_unique_file_name(file)
     path = get_initial_file_path(action_obj, conversion_obj, filename)
     # Save in S3 MediaStorage
