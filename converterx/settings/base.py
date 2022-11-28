@@ -312,7 +312,14 @@ CELERY_DEFAULT_QUEUE = "default"
 CELERY_DEFAULT_EXCHANGE = "normal"
 CELERY_DEFAULT_ROUTING_KEY = "default"
 CELERY_ACKS_LATE = True
-
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [(os.environ.get("CHANNELS_URLS", "redis://localhost:6379/0"))],
+        },
+    },
+}
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
 CORS_URLS_REGEX = r"^/api/.*$"
 # CORS_ORIGIN_ALLOW_ALL = True   # If this is used then `CORS_ORIGIN_WHITELIST`
@@ -376,3 +383,4 @@ ADMIN_MODEL_OVERRIDE = [
 
 # Deepl
 DEEPL_API_KEY = env.str("DEEPL_API_KEY", default="")
+ASGI_APPLICATION = "converterx.asgi.application"

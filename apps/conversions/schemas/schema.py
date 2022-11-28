@@ -10,6 +10,25 @@ class ConversionType(DjangoObjectType):
         model = Conversion
 
 
+class RemoveConversion(graphene.Mutation):
+    message = graphene.String()
+
+    class Arguments:
+        conversion_id = graphene.String()
+
+    def mutate(self, info, **kwargs):
+        conversion_id = kwargs.get("conversion_id")
+        conversion_obj = Conversion.objects.get(id=conversion_id)
+        # Remove initial file and conversion file from s3
+        if conversion_obj.initial_file:
+            conversion_obj.initial_file.delete()
+        if conversion_obj.converted_file:
+            conversion_obj.converted_file.delete()
+        # Delete object
+        conversion_obj.delete()
+        return RemoveConversion(message="Conversion is removed.")
+
+
 class SetConversionToAction(graphene.Mutation):
     conversion = graphene.Field(ConversionType)
     message = graphene.String()
@@ -39,3 +58,4 @@ class SetConversionToAction(graphene.Mutation):
 
 class Mutation(graphene.ObjectType):
     set_conversion_to_action = SetConversionToAction.Field()
+    remove_conversion = RemoveConversion.Field()

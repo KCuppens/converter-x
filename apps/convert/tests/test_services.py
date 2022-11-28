@@ -1,9 +1,7 @@
 from django.core.files.uploadedfile import SimpleUploadedFile
 
-from apps.action.tests.factories import ActionFactory
 from apps.base.utils import CustomGraphQLTestCase
-from apps.conversions.tests.factories import ConversionFactory
-from apps.convert.services.ConvertEngine import ConvertEngine, calculate_step_percentage
+from apps.convert.services.ConvertEngine import ConvertEngine
 
 
 class ConvertTestCase(CustomGraphQLTestCase):
@@ -38,9 +36,3 @@ class ConvertTestCase(CustomGraphQLTestCase):
 
     def test_check_mime_type_supported_not(self):
         self.assertFalse(ConvertEngine().check_mime_type_supported("application/pd"))
-
-    def test_calculate_step_percentage(self):
-        action = ActionFactory()
-        conversion = ConversionFactory()
-        action.conversions.add(conversion)
-        self.assertEqual(calculate_step_percentage(action.conversions.all()), 25)
