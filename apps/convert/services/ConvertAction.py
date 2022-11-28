@@ -80,6 +80,6 @@ class ConvertAction:
         conversion_obj.converted_file = converted_file
         conversion_obj.save(update_fields=["converted_file"])
         # File is compressed, update status to closed
-        conversion_obj.init_file.status = STATUS_CLOSED
-        conversion_obj.init_file.save(update_fields=["status", "converted_file"])
+        conversion_obj.initial_file.status = STATUS_CLOSED
+        conversion_obj.initial_file.save(update_fields=["status", "converted_file"])
         return converted_file
