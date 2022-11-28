@@ -23,4 +23,5 @@ class FileConverterTestCase(CustomGraphQLTestCase):
             self.assertTrue(path)
             self.assertTrue(self.media_storage.exists(path))
             self.initial_file.delete()
+            self.media_storage.delete(path)
             self.assertFalse(self.media_storage.exists(path))
