@@ -1,3 +1,5 @@
+import subprocess
+
 import requests
 
 from apps.converted_files.utils import get_converted_file_path
@@ -14,11 +16,6 @@ class FileConverter:
         # Get conversion path
         path = get_converted_file_path(conversion.initial_file)
         # Convert
-        import comtypes.client
-
-        word = comtypes.client.CreateObject("Word.Application")
-        doc = word.Documents.Open(file_name)
-        doc.SaveAs(path, FileFormat=17)
-        doc.Close()
-        word.Quit()
+        cmd = "libreoffice --convert-to pdf".split() + [file_name] + "--outdir".split() + [path]
+        subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
         return path
