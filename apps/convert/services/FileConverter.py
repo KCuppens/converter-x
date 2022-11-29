@@ -2,7 +2,7 @@ import subprocess
 
 import requests
 
-from apps.converted_files.utils import get_converted_file_path
+from apps.convert.utils import get_conversion_path
 from apps.initial_files.utils import get_unique_file_name
 
 
@@ -13,13 +13,12 @@ class FileConverter:
         r = requests.get(initial_file.file.url)
         file_name = get_unique_file_name(initial_file.file)
         open(file_name, "wb").write(r.content)
-        # Get conversion path
-        path = get_converted_file_path(conversion.initial_file).replace("doc", "pdf")
+        path = get_conversion_path(conversion)
         # Convert
         cmd = ["libreoffice", "--convert-to", "pdf", "--outdir", path, file_name]
         p = subprocess.Popen(cmd)
         p.communicate()
-        return path
+        return f"{path}{file_name.replace('.doc', '.pdf')}"
 
     def convert_from_docx_to_pdf(self, conversion):
         initial_file = conversion.initial_file
@@ -27,9 +26,9 @@ class FileConverter:
         file_name = get_unique_file_name(initial_file.file)
         open(file_name, "wb").write(r.content)
         # Get conversion path
-        path = get_converted_file_path(conversion.initial_file).replace("docx", "pdf")
+        path = get_conversion_path(conversion)
         # Convert
         cmd = ["libreoffice", "--convert-to", "pdf", "--outdir", path, file_name]
         p = subprocess.Popen(cmd)
         p.communicate()
-        return path
+        return f"{path}{file_name.replace('.docx', '.pdf')}"
