@@ -19,3 +19,15 @@ class FileConverter:
         cmd = "libreoffice --convert-to pdf".split() + [file_name] + "--outdir".split() + [path]
         subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
         return path
+
+    def convert_from_docx_to_pdf(self, conversion):
+        initial_file = conversion.initial_file
+        r = requests.get(initial_file.file.url)
+        file_name = get_unique_file_name(initial_file.file)
+        open(file_name, "wb").write(r.content)
+        # Get conversion path
+        path = get_converted_file_path(conversion.initial_file)
+        # Convert
+        cmd = "libreoffice --convert-to pdf".split() + [file_name] + "--outdir".split() + [path]
+        subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+        return path
