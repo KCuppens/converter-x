@@ -14,7 +14,7 @@ class FileConverter:
         file_name = get_unique_file_name(initial_file.file)
         open(file_name, "wb").write(r.content)
         # Get conversion path
-        path = get_converted_file_path(conversion.initial_file)
+        path = get_converted_file_path(conversion.initial_file).replace("doc", "pdf")
         # Convert
         cmd = "libreoffice --convert-to pdf".split() + [file_name] + "--outdir".split() + [path]
         subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
@@ -26,7 +26,7 @@ class FileConverter:
         file_name = get_unique_file_name(initial_file.file)
         open(file_name, "wb").write(r.content)
         # Get conversion path
-        path = get_converted_file_path(conversion.initial_file)
+        path = get_converted_file_path(conversion.initial_file).replace("docx", "pdf")
         # Convert
         cmd = "libreoffice --convert-to pdf".split() + [file_name] + "--outdir".split() + [path]
         subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
