@@ -26,7 +26,7 @@ class FileConverterTestCase(CustomGraphQLTestCase):
             self.assertTrue(path.split(".")[-1] == "pdf")
             self.assertTrue(os.path.exists(path))
             self.assertTrue(path)
-            self.initial_file.delete()
+            os.remove(path)
             self.assertFalse(os.path.exists(path))
 
     def test_convert_docx_to_pdf(self):
@@ -39,5 +39,5 @@ class FileConverterTestCase(CustomGraphQLTestCase):
             self.assertTrue(path.split(".")[-1] == "pdf")
             self.assertTrue(os.path.exists(path))
             self.assertTrue(path)
-            self.initial_file.delete()
+            os.remove(path)
             self.assertFalse(os.path.exists(path))
