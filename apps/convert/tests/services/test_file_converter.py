@@ -1,3 +1,4 @@
+import os
 import sys
 
 from apps.action.tests.factories import ActionFactory
@@ -23,11 +24,10 @@ class FileConverterTestCase(CustomGraphQLTestCase):
         else:
             path = FileConverter().convert_from_doc_to_pdf(self.conversion)
             self.assertTrue(path.split(".")[-1] == "pdf")
+            self.assertTrue(os.path.exists(path))
             self.assertTrue(path)
-            self.assertTrue(self.media_storage.exists(path))
             self.initial_file.delete()
-            self.media_storage.delete(path)
-            self.assertFalse(self.media_storage.exists(path))
+            self.assertFalse(os.path.exists(path))
 
     def test_convert_docx_to_pdf(self):
         self.initial_file.file = "test_file.docx"
@@ -37,8 +37,7 @@ class FileConverterTestCase(CustomGraphQLTestCase):
         else:
             path = FileConverter().convert_from_docx_to_pdf(self.conversion)
             self.assertTrue(path.split(".")[-1] == "pdf")
+            self.assertTrue(os.path.exists(path))
             self.assertTrue(path)
-            self.assertTrue(self.media_storage.exists(path))
             self.initial_file.delete()
-            self.media_storage.delete(path)
-            self.assertFalse(self.media_storage.exists(path))
+            self.assertFalse(os.path.exists(path))
