@@ -47,6 +47,7 @@ jobs:
         mysql -e 'SHOW DATABASES;' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
     - name: Install Dependencies
       run: |
+        sudo apt-get install -y calibre
         sudo apt-get install libreoffice-writer
         python -m pip install --upgrade pip setuptools wheel
         python -m pip install -r requirements/local.txt  
