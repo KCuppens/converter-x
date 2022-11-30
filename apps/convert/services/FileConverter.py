@@ -193,3 +193,17 @@ class FileConverter:
         p = subprocess.Popen(cmd)
         p.communicate()
         return f"{path}{file_name.replace('.mp3', '.mp4')}"
+
+    def convert_from_mp3_to_wav(self, conversion):
+        initial_file = conversion.initial_file
+        r = requests.get(initial_file.file.url)
+        file_name = get_unique_file_name(initial_file.file)
+        open(file_name, "wb").write(r.content)
+        # Get conversion path
+        path = get_conversion_path(conversion)
+        # Convert
+        from pydub import AudioSegment
+
+        sound = AudioSegment.from_mp3(file_name)
+        sound.export(f"{path}{file_name.replace('.mp3', '.wav')}")
+        return f"{path}{file_name.replace('.mp3', '.wav')}"
