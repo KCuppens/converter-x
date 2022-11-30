@@ -54,7 +54,6 @@ class FileConverter:
         # Get conversion path
         path = get_conversion_path(conversion)
         # Convert
-        from moviepy.editor import *  # noqa F401, F403
         from moviepy.editor import VideoFileClip
 
         video_clip = VideoFileClip(file_name)
