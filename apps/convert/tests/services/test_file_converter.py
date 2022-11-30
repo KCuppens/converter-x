@@ -17,7 +17,7 @@ class FileConverterTestCase(CustomGraphQLTestCase):
         self.conversion = ConversionFactory(initial_file=self.initial_file)
 
     def test_convert_from_doc_to_pdf(self):
-        self.initial_file.file = "test_doc.doc"
+        self.initial_file.file = "test_files/test_doc.doc"
         self.initial_file.save(update_fields=["file"])
         if sys.platform == "win32":
             assert True
@@ -30,7 +30,7 @@ class FileConverterTestCase(CustomGraphQLTestCase):
             self.assertFalse(os.path.exists(path))
 
     def test_convert_docx_to_pdf(self):
-        self.initial_file.file = "test_docx.docx"
+        self.initial_file.file = "test_files/test_docx.docx"
         self.initial_file.save(update_fields=["file"])
         if sys.platform == "win32":
             assert True
@@ -43,7 +43,7 @@ class FileConverterTestCase(CustomGraphQLTestCase):
             self.assertFalse(os.path.exists(path))
 
     def test_convert_from_epub_to_pdf(self):
-        self.initial_file.file = "test_epub.epub"
+        self.initial_file.file = "test_files/test_epub.epub"
         self.initial_file.save(update_fields=["file"])
         if sys.platform == "win32":
             assert True

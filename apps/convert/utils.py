@@ -6,9 +6,14 @@ def get_conversion_path(conversion_obj):
 
 
 def download_file(url, file_name):
-    import requests
+    from urllib.request import Request, urlopen
 
-    r = requests.get(url, stream=True)
+    print(url)
+    req = Request(url=url, headers={"User-Agent": "XYZ/3.0"})
+    with urlopen(req, timeout=10) as url:
+        s = url.read()
+
     with open(file_name, "wb") as f:
-        for chunk in r.iter_content():
-            f.write(chunk)
+        f.write(s)
+
+    return file_name
