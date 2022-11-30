@@ -70,7 +70,7 @@ class FileConverterTestCase(CustomGraphQLTestCase):
             self.assertTrue(path)
             os.remove(path)
             self.assertFalse(os.path.exists(path))
-        
+
     def test_convert_from_m4a_to_mp3(self):
         self.initial_file.file = "test_files/test_m4a.m4a"
         self.initial_file.save(update_fields=["file"])

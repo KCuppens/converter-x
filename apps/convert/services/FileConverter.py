@@ -59,7 +59,7 @@ class FileConverter:
         video_clip = VideoFileClip(file_name)
         video_clip.write_videofile(f"{path}{file_name.replace('.gif', '.mp4')}")
         return f"{path}{file_name.replace('.gif', '.mp4')}"
-        
+
     def convert_from_m4a_to_mp3(self, conversion):
         initial_file = conversion.initial_file
         r = requests.get(initial_file.file.url)
@@ -69,9 +69,10 @@ class FileConverter:
         path = get_conversion_path(conversion)
         # Convert
         from pydub import AudioSegment
+
         sound = AudioSegment.from_file(file_name)
         sound.export(f"{path}{file_name.replace('.m4a', '.mp3')}")
-        return f"{path}{file_name.replace('.m4a', '.mp3')}"        
+        return f"{path}{file_name.replace('.m4a', '.mp3')}"
 
     def convert_from_jpg_to_pdf(self, conversion):
         initial_file = conversion.initial_file
@@ -125,4 +126,3 @@ class FileConverter:
         )
         data.save(f"{path}{file_name.replace('.heic', '.jpg')}")
         return f"{path}{file_name.replace('.heic', '.jpg')}"
-
