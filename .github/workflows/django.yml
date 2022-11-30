@@ -47,6 +47,7 @@ jobs:
         mysql -e 'SHOW DATABASES;' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
     - name: Install Dependencies
       run: |
+        sudo apt-get install ffmpeg
         sudo apt-get install pandoc
         sudo apt-get install -y calibre
         sudo apt-get install libreoffice-writer

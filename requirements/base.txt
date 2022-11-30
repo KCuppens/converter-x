@@ -33,3 +33,4 @@ celery_once==3.0.1
 # Conversions
 pyheif==0.7.0
 moviepy==1.0.3
+pydub==0.25.1  # Audio conversion -

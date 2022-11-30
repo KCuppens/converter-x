@@ -71,6 +71,19 @@ class FileConverterTestCase(CustomGraphQLTestCase):
             os.remove(path)
             self.assertFalse(os.path.exists(path))
 
+    def test_convert_from_m4a_to_mp3(self):
+        self.initial_file.file = "test_files/test_m4a.m4a"
+        self.initial_file.save(update_fields=["file"])
+        if sys.platform == "win32":
+            assert True
+        else:
+            path = FileConverter().convert_from_m4a_to_mp3(self.conversion)
+            self.assertTrue(path.split(".")[-1] == "mp3")
+            self.assertTrue(os.path.exists(path))
+            self.assertTrue(path)
+            os.remove(path)
+            self.assertFalse(os.path.exists(path))
+
     def test_convert_from_jpg_to_pdf(self):
         self.initial_file.file = "test_files/test_jpg.jpg"
         self.initial_file.save(update_fields=["file"])
