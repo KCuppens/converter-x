@@ -2,7 +2,7 @@ import subprocess
 
 import requests
 
-from apps.convert.utils import download_file, get_conversion_path
+from apps.convert.utils import get_conversion_path
 from apps.initial_files.utils import get_unique_file_name
 
 
@@ -35,9 +35,9 @@ class FileConverter:
 
     def convert_from_epub_to_pdf(self, conversion):
         initial_file = conversion.initial_file
+        r = requests.get(initial_file.file.url)
         file_name = get_unique_file_name(initial_file.file)
-        # Download file
-        download_file(initial_file.file.url, file_name)
+        open(file_name, "wb").write(r.content)
         # Get conversion path
         path = get_conversion_path(conversion)
         # Convert from epub to html
