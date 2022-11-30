@@ -39,9 +39,9 @@ class FileConverter:
         file_name = get_unique_file_name(initial_file.file)
         open(file_name, "wb").write(r.content)
         # Get conversion path
-        path = get_conversion_path(conversion)
+        path = get_conversion_path(conversion) + file_name.replace(".epub", ".pdf")
         # Convert
         cmd = ["ebook-convert", file_name, path]
         p = subprocess.Popen(cmd)
         p.communicate()
-        return f"{path}{file_name.replace('.epub', '.pdf')}"
+        return path
