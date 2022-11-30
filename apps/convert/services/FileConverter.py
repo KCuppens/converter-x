@@ -38,10 +38,16 @@ class FileConverter:
         r = requests.get(initial_file.file.url)
         file_name = get_unique_file_name(initial_file.file)
         open(file_name, "wb").write(r.content)
+        # Zip file for conversion
+        from zipfile import ZipFile
+
+        zip_file = ZipFile(file_name.replace(".epub", ".zip"), "w")
+        zip_file.write(file_name)
+        zip_file.close()
         # Get conversion path
         path = get_conversion_path(conversion) + file_name.replace(".epub", ".pdf")
         # Convert
-        cmd = ["ebook-convert", file_name, path]
+        cmd = ["ebook-convert", file_name.replace(".epub", ".zip"), "w", path]
         p = subprocess.Popen(cmd)
         p.communicate()
         return path
