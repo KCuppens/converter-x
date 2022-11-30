@@ -16,7 +16,7 @@ class FileConverterTestCase(CustomGraphQLTestCase):
         self.action = ActionFactory()
         self.initial_file = InitialFileFactory()
         self.conversion = ConversionFactory(initial_file=self.initial_file)
-        if os.path.exists(get_conversion_path(self.conversion)):
+        if not os.path.exists(get_conversion_path(self.conversion)):
             os.makedirs(get_conversion_path(self.conversion))
 
     def test_convert_from_doc_to_pdf(self):
