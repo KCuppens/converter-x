@@ -126,3 +126,23 @@ class FileConverter:
         )
         data.save(f"{path}{file_name.replace('.heic', '.jpg')}")
         return f"{path}{file_name.replace('.heic', '.jpg')}"
+
+    def convert_from_mkv_to_mp4(self, conversion):
+        initial_file = conversion.initial_file
+        r = requests.get(initial_file.file.url)
+        file_name = get_unique_file_name(initial_file.file)
+        open(file_name, "wb").write(r.content)
+        # Get conversion path
+        path = get_conversion_path(conversion)
+        # Convert
+        cmd = [
+            "ffmpeg",
+            "-i",
+            file_name,
+            "-codec",
+            "copy",
+            f"{path}{file_name.replace('.mkv', '.mp4')}",
+        ]
+        p = subprocess.Popen(cmd)
+        p.communicate()
+        return f"{path}{file_name.replace('.mkv', '.mp4')}"
