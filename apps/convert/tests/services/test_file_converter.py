@@ -70,7 +70,7 @@ class FileConverterTestCase(CustomGraphQLTestCase):
             self.assertTrue(path)
             os.remove(path)
             self.assertFalse(os.path.exists(path))
-    
+
     def test_convert_from_jpg_to_pdf(self):
         self.initial_file.file = "test_files/test_jpg.jpg"
         self.initial_file.save(update_fields=["file"])
@@ -83,8 +83,7 @@ class FileConverterTestCase(CustomGraphQLTestCase):
             self.assertTrue(path)
             os.remove(path)
             self.assertFalse(os.path.exists(path))
-        
-        
+
     def test_convert_from_jpg_to_png(self):
         self.initial_file.file = "test_files/test_jpg.jpg"
         self.initial_file.save(update_fields=["file"])
@@ -97,7 +96,7 @@ class FileConverterTestCase(CustomGraphQLTestCase):
             self.assertTrue(path)
             os.remove(path)
             self.assertFalse(os.path.exists(path))
-            
+
     def test_convert_from_heic_to_jpg(self):
         self.initial_file.file = "test_files/test_heic.heic"
         self.initial_file.save(update_fields=["file"])
