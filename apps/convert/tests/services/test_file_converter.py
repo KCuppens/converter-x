@@ -65,7 +65,7 @@ class FileConverterTestCase(CustomGraphQLTestCase):
             assert True
         else:
             path = FileConverter().convert_from_gif_to_mp4(self.conversion)
-            self.assertTrue(path.split(".")[-1] == "gif")
+            self.assertTrue(path.split(".")[-1] == "mp4")
             self.assertTrue(os.path.exists(path))
             self.assertTrue(path)
             os.remove(path)
