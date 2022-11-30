@@ -6,6 +6,7 @@ from apps.base.storage_backends import MediaStorage
 from apps.base.utils import CustomGraphQLTestCase
 from apps.conversions.tests.factories import ConversionFactory
 from apps.convert.services.FileConverter import FileConverter
+from apps.convert.utils import get_conversion_path
 from apps.initial_files.tests.factories import InitialFileFactory
 
 
@@ -15,6 +16,8 @@ class FileConverterTestCase(CustomGraphQLTestCase):
         self.action = ActionFactory()
         self.initial_file = InitialFileFactory()
         self.conversion = ConversionFactory(initial_file=self.initial_file)
+        if os.path.exists(get_conversion_path(self.conversion)):
+            os.makedirs(get_conversion_path(self.conversion))
 
     def test_convert_from_doc_to_pdf(self):
         self.initial_file.file = "test_files/test_doc.doc"
