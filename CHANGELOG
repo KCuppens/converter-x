@@ -11,7 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - ENG-12 heic to jpg
 
-## [0.7.3] 2022-11-29
+## [0.7.4] 2022-11-30
+
+### Fixed
+- ENG-11 gif to mp4
+
+## [0.7.3] 2022-11-30
 
 ### Fixed
 - ENG-10 epub to pdf
