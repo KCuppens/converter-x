@@ -207,3 +207,17 @@ class FileConverter:
         sound = AudioSegment.from_mp3(file_name)
         sound.export(f"{path}{file_name.replace('.mp3', '.wav')}")
         return f"{path}{file_name.replace('.mp3', '.wav')}"
+
+    def convert_from_mp4_to_gif(self, conversion):
+        initial_file = conversion.initial_file
+        r = requests.get(initial_file.file.url)
+        file_name = get_unique_file_name(initial_file.file)
+        open(file_name, "wb").write(r.content)
+        # Get conversion path
+        path = get_conversion_path(conversion)
+        # Convert
+        from moviepy import VideoFileClip
+
+        video_clip = VideoFileClip(file_name)
+        video_clip.write_gif(f"{path}{file_name.replace('.mp4', '.gif')}")
+        return f"{path}{file_name.replace('.mp4', '.gif')}"
