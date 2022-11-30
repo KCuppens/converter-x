@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [not released]
 
+## [0.7.6] 2022-11-30
+
+### Fixed
+- ENG-13 jpg to pdf
+
 ## [0.7.5] 2022-11-30
 
 ### Fixed
@@ -16,7 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - ENG-11 gif to mp4
 
-## [0.7.3] 2022-11-30
+
+## [0.7.3] 2022-11-29
 
 ### Fixed
 - ENG-10 epub to pdf

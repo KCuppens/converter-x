@@ -58,6 +58,21 @@ class FileConverter:
         video_clip = VideoFileClip(file_name)
         video_clip.write_videofile(f"{path}{file_name.replace('.gif', '.mp4')}")
         return f"{path}{file_name.replace('.gif', '.mp4')}"
+
+    def convert_from_jpg_to_pdf(self, conversion):
+        initial_file = conversion.initial_file
+        r = requests.get(initial_file.file.url)
+        file_name = get_unique_file_name(initial_file.file)
+        open(file_name, "wb").write(r.content)
+        # Get conversion path
+        path = get_conversion_path(conversion)
+        # Convert
+        from PIL import Image
+
+        image = Image.open(file_name)
+        image_convert = image.convert("RGB")
+        image_convert.save(f"{path}{file_name.replace('.jpg', '.pdf')}")
+        return f"{path}{file_name.replace('.jpg', '.pdf')}"
    
     def convert_from_heic_to_jpg(self, conversion):
         initial_file = conversion.initial_file
@@ -82,3 +97,4 @@ class FileConverter:
         data.save(f"{path}{file_name.replace('.heic', '.jpg')}")
         return f"{path}{file_name.replace('.heic', '.jpg')}"
 
+        
