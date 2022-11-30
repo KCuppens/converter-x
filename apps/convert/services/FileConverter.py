@@ -41,7 +41,7 @@ class FileConverter:
         # Get conversion path
         path = get_conversion_path(conversion)
         # Convert
-        cmd = ["ebook-convert", file_name, f"{path}{file_name.replace('.docx', '.pdf')}"]
+        cmd = ["ebook-convert", file_name, f"{path}{file_name.replace('.epub', '.pdf')}"]
         p = subprocess.Popen(cmd)
         p.communicate()
-        return f"{path}{file_name.replace('.docx', '.pdf')}"
+        return f"{path}{file_name.replace('.epub', '.pdf')}"
