@@ -65,7 +65,7 @@ class FileConverterTestCase(CustomGraphQLTestCase):
             assert True
         else:
             path = FileConverter().convert_from_heic_to_jpg(self.conversion)
-            self.assertTrue(path.split(".")[-1] == "heic")
+            self.assertTrue(path.split(".")[-1] == "jpg")
             self.assertTrue(os.path.exists(path))
             self.assertTrue(path)
             os.remove(path)
