@@ -64,7 +64,7 @@ class FileConverterTestCase(CustomGraphQLTestCase):
         if sys.platform == "win32":
             assert True
         else:
-            path = FileConverter().convert_from_epub_to_pdf(self.conversion)
+            path = FileConverter().convert_from_gif_to_mp4(self.conversion)
             self.assertTrue(path.split(".")[-1] == "gif")
             self.assertTrue(os.path.exists(path))
             self.assertTrue(path)
