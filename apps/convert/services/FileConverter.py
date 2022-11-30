@@ -45,9 +45,9 @@ class FileConverter:
         zip_file.write(file_name)
         zip_file.close()
         # Get conversion path
-        path = get_conversion_path(conversion) + file_name.replace(".epub", ".pdf")
+        path = file_name.replace(".epub", ".pdf")
         # Convert
-        cmd = ["ebook-convert", file_name.replace(".epub", ".zip"), "w", path]
+        cmd = ["ebook-convert", file_name.replace(".epub", ".zip"), path]
         p = subprocess.Popen(cmd)
         p.communicate()
         return path
