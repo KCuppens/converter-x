@@ -173,3 +173,23 @@ class FileConverter:
         sound = AudioSegment.from_file(file_name)
         sound.export(f"{path}{file_name.replace('.mp3', '.m4a')}")
         return f"{path}{file_name.replace('.mp3', '.m4a')}"
+
+    def convert_from_mp3_to_mp4(self, conversion):
+        initial_file = conversion.initial_file
+        r = requests.get(initial_file.file.url)
+        file_name = get_unique_file_name(initial_file.file)
+        open(file_name, "wb").write(r.content)
+        # Get conversion path
+        path = get_conversion_path(conversion)
+        # Convert
+        cmd = [
+            "ffmpeg",
+            "-i",
+            file_name,
+            "-acodec",
+            "copy",
+            f"{path}{file_name.replace('.mp3', '.mp4')}",
+        ]
+        p = subprocess.Popen(cmd)
+        p.communicate()
+        return f"{path}{file_name.replace('.mp3', '.mp4')}"
