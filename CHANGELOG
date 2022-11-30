@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.18] 2022-11-30
+
+### Added
+- ENG-25 pdf to doc
+
+## [0.7.17] 2022-11-30
+
+### Fixed
+- ENG-24 mp3 to mp4
+
 ## [0.7.16] 2022-11-30
 
 ### Added
@@ -31,16 +41,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - ENG-19 mp3 to mp4
 
-
 ## [0.7.11] 2022-11-30
 
 ### Added
 - ENG-18 mp3 to m4a
-
-## [0.7.17] 2022-11-30
-
-### Fixed
-- ENG-24 mp3 to mp4
 
 ## [0.7.10] 2022-11-30
 

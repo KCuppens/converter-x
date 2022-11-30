@@ -263,3 +263,16 @@ class FileConverter:
         p = subprocess.Popen(cmd)
         p.communicate()
         return f"{path}{file_name.replace('.mp4', '.mov')}"
+
+    def convert_from_pdf_to_doc(self, conversion):
+        initial_file = conversion.initial_file
+        r = requests.get(initial_file.file.url)
+        file_name = get_unique_file_name(initial_file.file)
+        open(file_name, "wb").write(r.content)
+        # Get conversion path
+        path = get_conversion_path(conversion)
+        # Convert
+        from pdf2docx import parse
+
+        parse(file_name, f"{path}{file_name.replace('.pdf', '.doc')}")
+        return f"{path}{file_name.replace('.pdf', '.doc')}"
