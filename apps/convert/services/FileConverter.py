@@ -1,18 +1,15 @@
 import subprocess
 
-import requests
-
-from apps.convert.utils import get_conversion_path
+from apps.convert.utils import download_file, get_conversion_path
 from apps.initial_files.utils import get_unique_file_name
 
 
 class FileConverter:
     def convert_from_doc_to_pdf(self, conversion):
         initial_file = conversion.initial_file
-        # Download file and save
-        r = requests.get(initial_file.file.url)
         file_name = get_unique_file_name(initial_file.file)
-        open(file_name, "wb").write(r.content)
+        # Download file
+        download_file(initial_file.file.url, file_name)
         path = get_conversion_path(conversion)
         # Convert
         cmd = ["libreoffice", "--convert-to", "pdf", "--outdir", path, file_name]
@@ -22,9 +19,9 @@ class FileConverter:
 
     def convert_from_docx_to_pdf(self, conversion):
         initial_file = conversion.initial_file
-        r = requests.get(initial_file.file.url)
         file_name = get_unique_file_name(initial_file.file)
-        open(file_name, "wb").write(r.content)
+        # Download file
+        download_file(initial_file.file.url, file_name)
         # Get conversion path
         path = get_conversion_path(conversion)
         # Convert
@@ -35,9 +32,9 @@ class FileConverter:
 
     def convert_from_epub_to_pdf(self, conversion):
         initial_file = conversion.initial_file
-        r = requests.get(initial_file.file.url)
         file_name = get_unique_file_name(initial_file.file)
-        open(file_name, "wb").write(r.content)
+        # Download file
+        download_file(initial_file.file.url, file_name)
         # Get conversion path
         path = get_conversion_path(conversion)
         # Convert from epub to html
