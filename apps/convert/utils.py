@@ -6,7 +6,6 @@ def get_conversion_path(conversion_obj):
 
 
 def download_file(url, file_name):
-    import urllib
+    import urllib.request
 
-    testfile = urllib.URLopener()
-    testfile.retrieve(url, file_name)
+    urllib.request.urlretrieve(url, file_name)
