@@ -31,5 +31,4 @@ celery_once==3.0.1
 
 
 # Conversions
-pypandoc==1.10
-weasyprint==57.1
+moviepy==1.0.3
