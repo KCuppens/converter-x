@@ -31,5 +31,4 @@ celery_once==3.0.1
 
 
 # Conversions
-pypandoc==1.10
-weasyprint==57.1
+pyheif==0.7.0

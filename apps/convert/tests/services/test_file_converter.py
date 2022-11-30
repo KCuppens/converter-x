@@ -57,3 +57,16 @@ class FileConverterTestCase(CustomGraphQLTestCase):
             self.assertTrue(path)
             os.remove(path)
             self.assertFalse(os.path.exists(path))
+
+    def test_convert_from_heic_to_jpg(self):
+        self.initial_file.file = "test_files/test_heic.heic"
+        self.initial_file.save(update_fields=["file"])
+        if sys.platform == "win32":
+            assert True
+        else:
+            path = FileConverter().convert_from_heic_to_jpg(self.conversion)
+            self.assertTrue(path.split(".")[-1] == "heic")
+            self.assertTrue(os.path.exists(path))
+            self.assertTrue(path)
+            os.remove(path)
+            self.assertFalse(os.path.exists(path))

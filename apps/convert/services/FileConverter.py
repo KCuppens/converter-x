@@ -45,3 +45,26 @@ class FileConverter:
         p = subprocess.Popen(cmd)
         p.communicate()
         return f"{path}{file_name.replace('.epub', '.pdf')}"
+
+    def convert_from_heic_to_jpg(self, conversion):
+        initial_file = conversion.initial_file
+        r = requests.get(initial_file.file.url)
+        file_name = get_unique_file_name(initial_file.file)
+        open(file_name, "wb").write(r.content)
+        # Get conversion path
+        path = get_conversion_path(conversion)
+        # Convert
+        import pyheif
+        from PIL import Image
+
+        heif_file = pyheif.read_heif(file_name)
+        data = Image.frombytes(
+            heif_file.mode,
+            heif_file.size,
+            heif_file.data,
+            "raw",
+            heif_file.mode,
+            heif_file.stride,
+        )
+        data.save(f"{path}{file_name.replace('.heic', '.jpg')}")
+        return f"{path}{file_name.replace('.heic', '.jpg')}"
