@@ -16,7 +16,7 @@ class FileConverter:
         open(file_name, "wb").write(r.content)
         path = get_conversion_path(conversion)
         # Convert
-        cmd = ["libreoffice", "--convert-to", "pdf", "--outdir", path, file_name]
+        cmd = ["soffice", "--convert-to", "pdf", "--outdir", path, file_name]
         p = subprocess.Popen(cmd)
         p.communicate()
         return f"{path}{file_name.replace('.doc', '.pdf')}"
@@ -29,7 +29,7 @@ class FileConverter:
         # Get conversion path
         path = get_conversion_path(conversion)
         # Convert
-        cmd = ["libreoffice", "--convert-to", "pdf", "--outdir", path, file_name]
+        cmd = ["soffice", "--convert-to", "pdf", "--outdir", path, file_name]
         p = subprocess.Popen(cmd)
         p.communicate()
         return f"{path}{file_name.replace('.docx', '.pdf')}"
@@ -407,7 +407,7 @@ class FileConverter:
         path = get_conversion_path(conversion)
         # Convert
 
-        cmd = ["libreoffice", "--convert-to", "pdf", "--outdir", path, file_name]
+        cmd = ["soffice", "--convert-to", "pdf", "--outdir", path, file_name]
         p = subprocess.Popen(cmd)
         p.communicate()
         return f"{path}{file_name.replace('.pptx', '.pdf')}"
