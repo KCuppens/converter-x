@@ -265,6 +265,19 @@ class FileConverter:
         p.communicate()
         return f"{path}{file_name.replace('.mp4', '.mov')}"
 
+    def convert_from_pdf_to_epub(self, conversion):
+        initial_file = conversion.initial_file
+        r = requests.get(initial_file.file.url)
+        file_name = get_unique_file_name(initial_file.file)
+        open(file_name, "wb").write(r.content)
+        # Get conversion path
+        path = get_conversion_path(conversion)
+        # Convert
+        cmd = ["ebook-convert", file_name, f"{path}{file_name.replace('.pdf', '.epub')}"]
+        p = subprocess.Popen(cmd)
+        p.communicate()
+        return f"{path}{file_name.replace('.pdf', '.epub')}"
+
     def convert_from_pdf_to_doc(self, conversion):
         initial_file = conversion.initial_file
         r = requests.get(initial_file.file.url)
