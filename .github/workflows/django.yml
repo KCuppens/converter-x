@@ -51,6 +51,7 @@ jobs:
         sudo apt-get install pandoc
         sudo apt-get install -y calibre
         sudo apt-get install libreoffice-writer
+        sudo apt-get install libreoffice-impress
         python -m pip install --upgrade pip setuptools wheel
         python -m pip install -r requirements/local.txt  
     - name: Migrate DB

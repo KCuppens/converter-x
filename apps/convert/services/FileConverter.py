@@ -16,7 +16,7 @@ class FileConverter:
         open(file_name, "wb").write(r.content)
         path = get_conversion_path(conversion)
         # Convert
-        cmd = ["libreoffice", "--convert-to", "pdf", "--outdir", path, file_name]
+        cmd = ["soffice", "--convert-to", "pdf", "--outdir", path, file_name]
         p = subprocess.Popen(cmd)
         p.communicate()
         return f"{path}{file_name.replace('.doc', '.pdf')}"
@@ -29,7 +29,7 @@ class FileConverter:
         # Get conversion path
         path = get_conversion_path(conversion)
         # Convert
-        cmd = ["libreoffice", "--convert-to", "pdf", "--outdir", path, file_name]
+        cmd = ["soffice", "--convert-to", "pdf", "--outdir", path, file_name]
         p = subprocess.Popen(cmd)
         p.communicate()
         return f"{path}{file_name.replace('.docx', '.pdf')}"
@@ -394,7 +394,7 @@ class FileConverter:
         from PIL import Image
 
         image = Image.open(file_name)
-        image = file_name.convert("RGB")
+        image = image.convert("RGB")
         image.save(f"{path}{file_name.replace('.png', '.pdf')}")
         return f"{path}{file_name.replace('.png', '.pdf')}"
 
@@ -406,7 +406,22 @@ class FileConverter:
         # Get conversion path
         path = get_conversion_path(conversion)
         # Convert
-        cmd = ["soffice", "--headless", "--convert-to", "pdf", "--outdir", path, file_name]
+
+        cmd = ["soffice", "--convert-to", "pdf", "--outdir", path, file_name]
         p = subprocess.Popen(cmd)
         p.communicate()
         return f"{path}{file_name.replace('.pptx', '.pdf')}"
+
+    def convert_from_wav_to_mp3(self, conversion):
+        initial_file = conversion.initial_file
+        r = requests.get(initial_file.file.url)
+        file_name = get_unique_file_name(initial_file.file)
+        open(file_name, "wb").write(r.content)
+        # Get conversion path
+        path = get_conversion_path(conversion)
+        # Convert
+        from pydub import AudioSegment
+
+        sound = AudioSegment.from_mp3(file_name)
+        sound.export(f"{path}{file_name.replace('.wav', '.mp3')}")
+        return f"{path}{file_name.replace('.wav', '.mp3')}"
