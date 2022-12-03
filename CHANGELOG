@@ -8,18 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.7.16] 2022-11-30
 
-### Fixed
+### Added
 - ENG-23 mp4 to mov
 
 ## [0.7.15] 2022-11-30
 
-### Fixed
-- ENG-15 mp4 to mkv
+### Added
+- ENG-22 mp4 to mkv
 
 ## [0.7.14] 2022-11-30
 
-### Fixed
-- ENG-15 mp4 to gif
+### Added
+- ENG-21 mp4 to gif
 
 ## [0.7.13] 2022-11-30
 
@@ -36,6 +36,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - ENG-18 mp3 to m4a
+
+## [0.7.17] 2022-11-30
+
+### Fixed
+- ENG-24 mp3 to mp4
 
 ## [0.7.10] 2022-11-30
 
