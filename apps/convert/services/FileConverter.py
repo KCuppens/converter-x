@@ -216,7 +216,7 @@ class FileConverter:
         # Get conversion path
         path = get_conversion_path(conversion)
         # Convert
-        from moviepy import VideoFileClip
+        from moviepy.editor import VideoFileClip
 
         video_clip = VideoFileClip(file_name)
         video_clip.write_gif(f"{path}{file_name.replace('.mp4', '.gif')}")
