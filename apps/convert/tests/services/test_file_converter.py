@@ -286,7 +286,7 @@ class FileConverterTestCase(CustomGraphQLTestCase):
             assert True
         else:
             path = FileConverter().convert_from_pdf_to_png(self.conversion)
-            self.assertTrue(path.split(".")[-1] == "png")
+            self.assertTrue(path.split(".")[-1] == "zip")
             self.assertTrue(os.path.exists(path))
             self.assertTrue(path)
             os.remove(path)
