@@ -394,7 +394,7 @@ class FileConverter:
         from PIL import Image
 
         image = Image.open(file_name)
-        image = file_name.convert("RGB")
+        image = image.convert("RGB")
         image.save(f"{path}{file_name.replace('.png', '.pdf')}")
         return f"{path}{file_name.replace('.png', '.pdf')}"
 
@@ -406,14 +406,8 @@ class FileConverter:
         # Get conversion path
         path = get_conversion_path(conversion)
         # Convert
-        import os
 
-        print(os.path.exists(file_name))
-        print(path)
-        print(file_name)
-        cmd = ["libreoffice", "--headless", "--convert-to", "pdf", "--outdir", path, file_name]
-        print(os.path.exists(path))
-        print(os.path.exists(f"{path}{file_name.replace('.pptx', '.pdf')}"))
+        cmd = ["libreoffice", "--convert-to", "pdf", "--outdir", path, file_name]
         p = subprocess.Popen(cmd)
         p.communicate()
         return f"{path}{file_name.replace('.pptx', '.pdf')}"
