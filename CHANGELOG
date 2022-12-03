@@ -6,7 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.7.19] 2022-11-30
+## [0.7.20] 2022-12-03
+
+### Added
+- ENG-27 pdf to epub
+
+## [0.7.19] 2022-12-03
 
 ### Added
 - ENG-26 pdf to docx
@@ -25,11 +30,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - ENG-23 mp4 to mov
-
-## [0.7.19] 2022-12-3
-
-### Added
-- ENG-15 pdf to docx
 
 ## [0.7.15] 2022-11-30
 
