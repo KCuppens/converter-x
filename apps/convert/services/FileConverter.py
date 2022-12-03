@@ -327,3 +327,31 @@ class FileConverter:
             zip_file.write(image)
         zip_file.close()
         return f"{path}images.zip"
+
+    def convert_from_pdf_to_png(self, conversion):
+        initial_file = conversion.initial_file
+        r = requests.get(initial_file.file.url)
+        file_name = get_unique_file_name(initial_file.file)
+        open(file_name, "wb").write(r.content)
+        # Get conversion path
+        path = get_conversion_path(conversion)
+        # Convert
+        import fitz
+
+        doc = fitz.open(file_name)
+        page_count = doc.page_count
+        images_zip = []
+        for page in range(page_count):
+            page = doc.load_page(page)
+            pix = page.get_pixmap()
+            output = f"{path}{file_name.replace('.pdf', f'_{page}.png')}"
+            pix.save(output)
+            images_zip.append(output)
+        # Zip it
+        from zipfile import ZipFile
+
+        zip_file = ZipFile(f"{path}images.zip", "w")
+        for image in images_zip:
+            zip_file.write(image)
+        zip_file.close()
+        return f"{path}images.zip"
