@@ -397,3 +397,16 @@ class FileConverter:
         image = file_name.convert("RGB")
         image.save(f"{path}{file_name.replace('.png', '.pdf')}")
         return f"{path}{file_name.replace('.png', '.pdf')}"
+
+    def convert_from_pptx_to_pdf(self, conversion):
+        initial_file = conversion.initial_file
+        r = requests.get(initial_file.file.url)
+        file_name = get_unique_file_name(initial_file.file)
+        open(file_name, "wb").write(r.content)
+        # Get conversion path
+        path = get_conversion_path(conversion)
+        # Convert
+        cmd = ["soffice", "--headless", "--convert-to", "pdf", "--outdir", path, file_name]
+        p = subprocess.Popen(cmd)
+        p.communicate()
+        return f"{path}{file_name.replace('.pptx', '.pdf')}"
