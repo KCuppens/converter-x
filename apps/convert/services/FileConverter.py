@@ -292,20 +292,6 @@ class FileConverter:
         return f"{path}{file_name.replace('.pptx', '.pdf')}"
 
     def convert_from_wav_to_mp3(self, conversion):
-        initial_file = conversion.initial_file
-        r = requests.get(initial_file.file.url)
-        file_name = get_unique_file_name(initial_file.file)
-        open(file_name, "wb").write(r.content)
-        # Get conversion path
-        path = get_conversion_path(conversion)
-        # Convert
-        from pydub import AudioSegment
-
-        sound = AudioSegment.from_mp3(file_name)
-        sound.export(f"{path}{file_name.replace('.wav', '.mp3')}")
-        return f"{path}{file_name.replace('.wav', '.mp3')}"
-
-    def convert_from_wav_to_mp3(self, conversion):
         file_name, path = get_initial_file_for_conversion(conversion)
         output = f"{path}{file_name.replace('.wav', '.mp3')}"
         # Convert
