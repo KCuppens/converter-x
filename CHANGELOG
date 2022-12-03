@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.27] 2022-12-03
+
+### Added
+- ENG-34 wav to mp3
+
 ## [0.7.26] 2022-12-03
 
 ### Added
