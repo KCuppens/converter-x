@@ -301,3 +301,29 @@ class FileConverter:
         # Convert
         parse(file_name, f"{path}{file_name.replace('.pdf', '.docx')}")
         return f"{path}{file_name.replace('.pdf', '.docx')}"
+
+    def convert_from_pdf_to_jpg(self, conversion):
+        initial_file = conversion.initial_file
+        r = requests.get(initial_file.file.url)
+        file_name = get_unique_file_name(initial_file.file)
+        open(file_name, "wb").write(r.content)
+        # Get conversion path
+        path = get_conversion_path(conversion)
+        # Convert
+        from pdf2image import convert_from_path
+
+        image = convert_from_path(file_name)
+        images_zip = []
+        count = 0
+        for page in range(len(image)):
+            image[page].save(f"{path}{file_name.replace('.pdf', f'{count}.jpg')}")
+            images_zip.append(f"{path}{file_name.replace('.pdf', f'{count}.jpg')}")
+            count += 1
+        # Zip it
+        from zipfile import ZipFile
+
+        zip_file = ZipFile(f"{path}images.zip", "w")
+        for image in images_zip:
+            zip_file.write(image)
+        zip_file.close()
+        return f"{path}images.zip"
