@@ -317,3 +317,16 @@ class FileConverterTestCase(CustomGraphQLTestCase):
             self.assertTrue(path)
             os.remove(path)
             self.assertFalse(os.path.exists(path))
+
+    def test_convert_from_png_to_pdf(self):
+        self.initial_file.file = "test_files/test_png.png"
+        self.initial_file.save(update_fields=["file"])
+        if sys.platform == "win32":
+            assert True
+        else:
+            path = FileConverter().convert_from_png_to_pdf(self.conversion)
+            self.assertTrue(path.split(".")[-1] == "pdf")
+            self.assertTrue(os.path.exists(path))
+            self.assertTrue(path)
+            os.remove(path)
+            self.assertFalse(os.path.exists(path))

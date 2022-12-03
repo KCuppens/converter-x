@@ -382,3 +382,18 @@ class FileConverter:
         image = Image.open(file_name)
         image.save(f"{path}{file_name.replace('.png', '.jpg')}")
         return f"{path}{file_name.replace('.png', '.jpg')}"
+
+    def convert_from_png_to_pdf(self, conversion):
+        initial_file = conversion.initial_file
+        r = requests.get(initial_file.file.url)
+        file_name = get_unique_file_name(initial_file.file)
+        open(file_name, "wb").write(r.content)
+        # Get conversion path
+        path = get_conversion_path(conversion)
+        # Convert
+        from PIL import Image
+
+        image = Image.open(file_name)
+        image = file_name.convert("RGB")
+        image.save(f"{path}{file_name.replace('.png', '.pdf')}")
+        return f"{path}{file_name.replace('.png', '.pdf')}"
