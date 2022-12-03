@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.26] 2022-12-03
+
+### Added
+- ENG-33 pptx to pdf
+
 ## [0.7.25] 2022-12-03
 
 ### Added
