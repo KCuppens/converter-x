@@ -1,6 +1,7 @@
 import subprocess
 
 import requests
+from pdf2docx import parse
 
 from apps.convert.utils import get_conversion_path
 from apps.initial_files.utils import get_unique_file_name
@@ -276,3 +277,14 @@ class FileConverter:
 
         parse(file_name, f"{path}{file_name.replace('.pdf', '.doc')}")
         return f"{path}{file_name.replace('.pdf', '.doc')}"
+
+    def convert_from_pdf_to_docx(self, conversion):
+        initial_file = conversion.initial_file
+        r = requests.get(initial_file.file.url)
+        file_name = get_unique_file_name(initial_file.file)
+        open(file_name, "wb").write(r.content)
+        # Get conversion path
+        path = get_conversion_path(conversion)
+        # Convert
+        parse(file_name, f"{path}{file_name.replace('.pdf', '.docx')}")
+        return f"{path}{file_name.replace('.pdf', '.docx')}"
