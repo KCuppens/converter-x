@@ -406,7 +406,14 @@ class FileConverter:
         # Get conversion path
         path = get_conversion_path(conversion)
         # Convert
-        cmd = ["soffice", "--headless", "--convert-to", "pdf", "--outdir", path, file_name]
+        import os
+
+        print(os.path.exists(file_name))
+        print(path)
+        print(file_name)
+        cmd = ["libreoffice", "--headless", "--convert-to", "pdf", "--outdir", path, file_name]
+        print(os.path.exists(path))
+        print(os.path.exists(f"{path}{file_name.replace('.pptx', '.pdf')}"))
         p = subprocess.Popen(cmd)
         p.communicate()
         return f"{path}{file_name.replace('.pptx', '.pdf')}"
